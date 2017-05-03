@@ -14,7 +14,7 @@ export class TagListComponent implements OnInit {
   private startIndex = 0;
   private totalCount = 0;
   private page = 0;
-  private perPage = 3;
+  private perPage = 10;
   private search_str = '';
   private keywords = '';
 
@@ -46,18 +46,11 @@ export class TagListComponent implements OnInit {
     this.dataService.setPage(page-1);
   }
 
-  delete(id) {
-    this.api.delete('posts/'+id)
-      .subscribe(res => {
-        console.log(res);
-        this.dataService.removeById(id);
-      });
-  }
-
   search() {
     let search = this.search_str.replace(/[,\s]+/g, ' ');
     this.api.post('posts/search', {search})
       .subscribe(res => {
+        this.page = 0;
         this.keywords = search;
         this.dataService.setData(res);
       });

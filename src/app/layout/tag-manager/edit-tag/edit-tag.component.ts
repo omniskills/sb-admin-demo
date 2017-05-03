@@ -15,13 +15,14 @@ export class EditTagComponent implements OnInit {
   private id: number;
   private sub: any;
   
-  constructor(private api: ApiService, private data: DataService, private router: Router, private route: ActivatedRoute) { }
+  constructor(private api: ApiService, private dataService: DataService,
+              private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
        this.id = params['id'];
        console.log(this.id);
-       let record = this.data.getById(this.id);
+       let record = this.dataService.getById(this.id);
        this.title = record.title;
        this.body = record.body;
        this.tagstr = record.tags;
@@ -30,6 +31,15 @@ export class EditTagComponent implements OnInit {
 
   ngOnDestroy() {
     this.sub.unsubscribe();
+  }
+
+  delete() {
+    this.api.delete('posts/'+this.id)
+      .subscribe(res => {
+        console.log(res);
+        this.dataService.removeById(this.id);
+        this.router.navigate(['/tag-manager']);
+      });
   }
 
   submit() {

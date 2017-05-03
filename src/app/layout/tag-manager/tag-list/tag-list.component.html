@@ -16,8 +16,7 @@
                     <th style="width: 5%">#</th>
                     <th style="width: 30%">Title</th>
                     <th style="width: 30%">Tags</th>
-                    <th style="width: 30%">Description</th>
-                    <th style="width: 5%"></th>
+                    <th style="width: 35%">Description</th>
                 </tr>
             </thead>
             <tbody>
@@ -26,11 +25,6 @@
                     <td><a [routerLink]="['/tag-manager/edit', row._id]">{{ row.title }}</a></td>
                     <td [innerHTML]="row.tags | highlight: keywords"></td>
                     <td [innerHTML]="row.body | truncate: 150 | highlight: keywords"></td>
-                    <td>
-                        <button class="btn btn-danger right" (click)="delete(row._id)">
-                            <i class="fa fa-trash-o"></i>
-                        </button>
-                    </td>
                 </tr>
             </tbody>
         </table>

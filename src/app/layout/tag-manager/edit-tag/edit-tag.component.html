@@ -9,8 +9,9 @@
     </fieldset>
     <fieldset class="form-group">
         <label>Description</label>
-        <textarea class="form-control" rows="3" name="body" [(ngModel)]="body"></textarea>
+        <textarea class="form-control" rows="20" name="body" [(ngModel)]="body"></textarea>
     </fieldset>
     <button class="btn btn-success" type="submit">Save</button>
+    <a class="btn btn-danger" (click)="delete()">Delete</a>
     <a class="btn btn-secondary" [routerLink]="['/tag-manager']">Back</a>
 </form>
