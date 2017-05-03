@@ -1,0 +1,47 @@
+<div class="row">
+    <div class="col-xl-12">
+        <form role="form">
+            <div class="form-group input-group">
+                <input type="text" class="form-control" name="search_str" [(ngModel)]="search_str" placeholder="Search tags or description... ">
+                <span class="input-group-btn">
+                    <button class="btn btn-secondary" type="button" (click)="search()">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </span>
+            </div>
+        </form>
+        <table class="table">
+            <thead>
+                <tr class="thead-inverse">
+                    <th style="width: 5%">#</th>
+                    <th style="width: 30%">Title</th>
+                    <th style="width: 30%">Tags</th>
+                    <th style="width: 30%">Description</th>
+                    <th style="width: 5%"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let row of data; let i = index;">
+                    <th scope="row">{{ startIndex + i + 1 }}</th>
+                    <td><a [routerLink]="['/tag-manager/edit', row._id]">{{ row.title }}</a></td>
+                    <td [innerHTML]="row.tags | highlight: keywords"></td>
+                    <td [innerHTML]="row.body | truncate: 150 | highlight: keywords"></td>
+                    <td>
+                        <button class="btn btn-danger right" (click)="delete(row._id)">
+                            <i class="fa fa-trash-o"></i>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-8 col-md-8">
+        <ngb-pagination [collectionSize]="totalCount" [page]="page+1" [pageSize]="perPage" (pageChange)="changePage($event)"></ngb-pagination>
+    </div>
+    <div class="col-xs-4 col-md-4">
+        <button class="btn btn-secondary right" [routerLink]="['/tag-manager/export']">Export</button>
+        <button class="btn btn-primary right" style="margin-right: 5px" [routerLink]="['/tag-manager/add']">Add</button>
+    </div>
+</div>

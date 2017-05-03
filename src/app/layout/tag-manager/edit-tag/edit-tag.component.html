@@ -1,0 +1,16 @@
+<form role="form" (ngSubmit)="submit()">
+    <fieldset class="form-group">
+        <label>Title</label>
+        <input class="form-control" name="title" [(ngModel)]="title">
+    </fieldset>
+    <fieldset class="form-group">
+        <label>Tags</label>
+        <textarea class="form-control" rows="3" name="tags" [(ngModel)]="tagstr"></textarea>
+    </fieldset>
+    <fieldset class="form-group">
+        <label>Description</label>
+        <textarea class="form-control" rows="3" name="body" [(ngModel)]="body"></textarea>
+    </fieldset>
+    <button class="btn btn-success" type="submit">Save</button>
+    <a class="btn btn-secondary" [routerLink]="['/tag-manager']">Back</a>
+</form>
